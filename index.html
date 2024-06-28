@@ -16,31 +16,38 @@
                  
 
 	<style>
-        .inner {
-            text-align: center;
-            margin: 20px;
-        }
-        .social-icons {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px; /* Adjust spacing between icons */
-        }
-        .social-icons li {
-            display: inline-block;
-        }
-        .social-icons a {
-            text-decoration: none;
-            color: inherit; /* Keeps the color inherited from surrounding text */
-            font-size: 30px; /* Size of the icons */
-            transition: color 0.3s ease; /* Smooth transition on hover */
-        }
-        .social-icons a:hover {
-            color: #0073b1; /* Change this color to match each social media brand or a general hover color */
-        }
-    </style>
+		ul.social-icons {
+		    list-style: none;
+		    padding: 0;
+		    margin: 20px 0;
+		    display: flex;
+		    justify-content: center;
+		    gap: 10px;
+		}
+		
+		ul.social-icons li {
+		    display: inline-block;
+		}
+		
+		ul.social-icons a {
+		    text-decoration: none;
+		    display: inline-flex;
+		    align-items: center;
+		    gap: 5px;
+		}
+		
+		ul.social-icons img.custom-icon {
+		    width: 24px;
+		    height: 24px;
+		    transition: opacity 0.3s;
+		}
+		
+		ul.social-icons img.custom-icon:hover {
+		    opacity: 0.7;
+		}
+
+      
+        </style>
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
