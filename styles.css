@@ -247,6 +247,59 @@ section {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.name-letter {
+    display: inline-block;
+    animation: bounce-in 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.name-letter:nth-child(1) { animation-delay: 1.2s; }
+.name-letter:nth-child(2) { animation-delay: 1.3s; }
+.name-letter:nth-child(3) { animation-delay: 1.4s; }
+.name-letter:nth-child(4) { animation-delay: 1.5s; }
+.name-letter:nth-child(5) { animation-delay: 1.6s; }
+.name-letter:nth-child(6) { animation-delay: 1.7s; }
+.name-letter:nth-child(7) { animation-delay: 1.8s; }
+.name-letter:nth-child(9) { animation-delay: 2.0s; }
+.name-letter:nth-child(10) { animation-delay: 2.1s; }
+.name-letter:nth-child(11) { animation-delay: 2.2s; }
+.name-letter:nth-child(12) { animation-delay: 2.3s; }
+.name-letter:nth-child(13) { animation-delay: 2.4s; }
+
+.name-space {
+    display: inline-block;
+    width: 0.3em;
+}
+
+@keyframes bounce-in {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.3);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.05);
+    }
+    70% {
+        transform: translateY(5px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.name-letter:hover {
+    animation: letter-wiggle 0.5s ease;
+}
+
+@keyframes letter-wiggle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(-5deg); }
+    75% { transform: translateY(-5px) rotate(5deg); }
 }
 
 .hero-subtitle {
@@ -975,8 +1028,12 @@ section {
 }
 
 .achievement-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-15px) scale(1.05);
     box-shadow: var(--shadow-xl);
+}
+
+.achievement-card:hover .achievement-icon {
+    transform: rotateY(360deg) scale(1.1);
 }
 
 .achievement-icon {
@@ -990,16 +1047,85 @@ section {
     font-size: 2rem;
     color: white;
     margin: 0 auto 1.5rem;
+    transition: all 0.6s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.achievement-icon::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    opacity: 0.3;
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+.achievement-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    animation: badge-pop 3s infinite;
+    z-index: 2;
+}
+
+@keyframes badge-pop {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+}
+
+.achievement-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.achievement-card:hover .achievement-shine {
+    left: 100%;
 }
 
 .achievement-card h3 {
     font-size: 1.5rem;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .achievement-card p {
     color: var(--text-secondary);
+    position: relative;
+    z-index: 1;
 }
 
 /* ===== CONTACT SECTION ===== */
