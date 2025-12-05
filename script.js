@@ -133,80 +133,113 @@ if (typingText) {
     setTimeout(typeTitle, 1000);
 }
 
-// ===== PARTICLE CANVAS =====
+// ===== MATRIX RAIN EFFECT =====
 const canvas = document.getElementById('particle-canvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 3 + 1;
-            this.speedX = Math.random() * 2 - 1;
-            this.speedY = Math.random() * 2 - 1;
-            this.color = `rgba(99, 102, 241, ${Math.random() * 0.5 + 0.2})`;
-        }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-
-            if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-            if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-        }
-
-        draw() {
-            ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
+    // Matrix rain characters
+    const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?/~`ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    
+    const drops = [];
+    for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * canvas.height / fontSize;
     }
 
-    const particles = [];
-    for (let i = 0; i < 100; i++) {
-        particles.push(new Particle());
-    }
-
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function drawMatrix() {
+        // Black background with fade effect
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        particles.forEach(particle => {
-            particle.update();
-            particle.draw();
-        });
-
-        // Connect particles
-        particles.forEach((a, i) => {
-            particles.slice(i + 1).forEach(b => {
-                const dx = a.x - b.x;
-                const dy = a.y - b.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 100) {
-                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 - distance / 500})`;
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(a.x, a.y);
-                    ctx.lineTo(b.x, b.y);
-                    ctx.stroke();
-                }
-            });
-        });
-
-        requestAnimationFrame(animateParticles);
+        ctx.fillStyle = '#00ff41';
+        ctx.font = fontSize + 'px monospace';
+        
+        for (let i = 0; i < drops.length; i++) {
+            // Random character
+            const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
+            
+            // Gradient effect
+            const gradient = ctx.createLinearGradient(x, y - 20, x, y + 20);
+            gradient.addColorStop(0, 'rgba(0, 255, 65, 0.1)');
+            gradient.addColorStop(0.5, 'rgba(0, 255, 65, 1)');
+            gradient.addColorStop(1, 'rgba(0, 255, 65, 0.1)');
+            ctx.fillStyle = gradient;
+            
+            // Add glow
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#00ff41';
+            
+            ctx.fillText(text, x, y);
+            
+            // Reset position randomly
+            if (y > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            
+            drops[i]++;
+        }
     }
 
-    animateParticles();
+    // Animate at 30fps for Matrix effect
+    setInterval(drawMatrix, 50);
 
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
+
+    // Add binary rain effect
+    const binaryRain = document.createElement('div');
+    binaryRain.className = 'binary-rain';
+    binaryRain.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+    `;
+    
+    for (let i = 0; i < 20; i++) {
+        const span = document.createElement('span');
+        span.textContent = Math.random() > 0.5 ? '1' : '0';
+        span.style.cssText = `
+            position: absolute;
+            top: -50px;
+            left: ${Math.random() * 100}%;
+            color: rgba(0, 255, 65, 0.3);
+            font-size: ${Math.random() * 20 + 10}px;
+            font-family: monospace;
+            animation: fall ${Math.random() * 3 + 2}s linear infinite;
+            animation-delay: ${Math.random() * 2}s;
+        `;
+        binaryRain.appendChild(span);
+    }
+    
+    if (document.querySelector('.hero')) {
+        document.querySelector('.hero').appendChild(binaryRain);
+    }
 }
+
+// CSS for binary rain
+const binaryStyle = document.createElement('style');
+binaryStyle.textContent = `
+    @keyframes fall {
+        to {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(binaryStyle);
 
 // ===== ANIMATED PARTICLES IN HERO =====
 function createParticle() {
