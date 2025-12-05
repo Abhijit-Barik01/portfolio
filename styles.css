@@ -827,12 +827,20 @@ section {
 }
 
 .tech-tag {
-    background: var(--bg-secondary);
+    background: rgba(59, 130, 246, 0.1);
     color: var(--primary-color);
     padding: 0.375rem 0.875rem;
     border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
     font-size: 0.875rem;
     font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 .achievements {
@@ -917,6 +925,7 @@ section {
     background: var(--gradient-primary);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -979,12 +988,20 @@ section {
 }
 
 .project-tags span {
-    background: var(--bg-secondary);
+    background: rgba(59, 130, 246, 0.1);
     color: var(--primary-color);
     padding: 0.375rem 0.875rem;
     border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
     font-size: 0.875rem;
     font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.project-tags span:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 .project-link {
@@ -1064,10 +1081,11 @@ section {
 }
 
 .skill-tag {
-    background: var(--bg-secondary);
+    background: rgba(59, 130, 246, 0.1);
     color: var(--text-primary);
     padding: 0.5rem 1rem;
     border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
     font-size: 0.875rem;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -1076,7 +1094,9 @@ section {
 .skill-tag:hover {
     background: var(--gradient-primary);
     color: white;
-    transform: translateY(-2px);
+    border-color: transparent;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 /* ===== ACHIEVEMENTS SECTION ===== */
@@ -1327,17 +1347,26 @@ section {
 .form-group textarea {
     width: 100%;
     padding: 1rem;
+    background: var(--bg-secondary);
     border: 2px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
     font-family: inherit;
-    transition: border-color 0.3s ease;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-tertiary);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
+    background: var(--bg-card);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .form-group textarea {
@@ -1788,7 +1817,8 @@ section {
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background: white;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
         width: 100%;
         text-align: center;
         transition: 0.3s;
