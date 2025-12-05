@@ -1,30 +1,37 @@
-/* ===== ROOT VARIABLES ===== */
+/* ===== ROOT VARIABLES - DARK THEME ===== */
 :root {
     --primary-color: #3b82f6;
     --secondary-color: #8b5cf6;
     --accent-color: #ec4899;
     --success-color: #10b981;
     --warning-color: #f59e0b;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
+    
+    /* Dark Theme Colors */
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
     --text-tertiary: #94a3b8;
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-tertiary: #f1f5f9;
-    --bg-dark: #0f172a;
-    --border-color: #e2e8f0;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --bg-card: #1e293b;
+    --bg-dark: #020617;
+    --border-color: #334155;
+    
+    /* Shadows for dark theme */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.6);
+    
+    /* Gradients */
     --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    --gradient-mesh: radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
-                     radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
-                     radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.1) 0px, transparent 50%),
-                     radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
+    --gradient-mesh: radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                     radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                     radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%);
 }
 
 /* ===== RESET & BASE STYLES ===== */
@@ -57,8 +64,8 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.03) 50%, transparent 100%),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.02) 2px, rgba(0, 0, 0, 0.02) 4px);
+        linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.05) 50%, transparent 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.02) 2px, rgba(255, 255, 255, 0.02) 4px);
     pointer-events: none;
     z-index: -1;
 }
@@ -113,17 +120,17 @@ section {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar.scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border-bottom-color: rgba(0, 0, 0, 0.1);
+    background: rgba(15, 23, 42, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-bottom-color: rgba(255, 255, 255, 0.15);
 }
 
 .navbar .container {
@@ -608,10 +615,10 @@ section {
 .stat {
     text-align: center;
     padding: 2rem 1.5rem;
-    background: white;
+    background: var(--bg-card);
     border-radius: 16px;
     border: 1px solid var(--border-color);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -691,9 +698,10 @@ section {
 }
 
 .about-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 16px;
     padding: 2rem;
+    border: 1px solid var(--border-color);
     box-shadow: var(--shadow-lg);
 }
 
@@ -768,7 +776,7 @@ section {
 }
 
 .experience-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 16px;
     padding: 2rem;
     box-shadow: var(--shadow-md);
@@ -869,10 +877,10 @@ section {
 }
 
 .project-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 20px;
     padding: 2.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--border-color);
     position: relative;
@@ -1017,9 +1025,10 @@ section {
 }
 
 .skill-category {
-    background: white;
+    background: var(--bg-card);
     border-radius: 16px;
     padding: 2rem;
+    border: 1px solid var(--border-color);
     box-shadow: var(--shadow-md);
     transition: all 0.3s ease;
 }
@@ -1100,19 +1109,33 @@ section {
 }
 
 .achievement-icon {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     background: var(--gradient-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: white;
     margin: 0 auto 1.5rem;
     transition: all 0.6s ease;
     position: relative;
     z-index: 1;
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4),
+                0 0 0 0 rgba(59, 130, 246, 0.5);
+    animation: icon-glow 2s ease-in-out infinite;
+}
+
+@keyframes icon-glow {
+    0%, 100% {
+        box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4),
+                    0 0 0 0 rgba(59, 130, 246, 0.5);
+    }
+    50% {
+        box-shadow: 0 8px 40px rgba(59, 130, 246, 0.6),
+                    0 0 0 15px rgba(59, 130, 246, 0);
+    }
 }
 
 .achievement-icon::before {
@@ -1121,7 +1144,7 @@ section {
     inset: -5px;
     border-radius: 50%;
     background: var(--gradient-primary);
-    opacity: 0.3;
+    opacity: 0.4;
     animation: pulse-ring 2s infinite;
 }
 
@@ -1268,9 +1291,10 @@ section {
 }
 
 .contact-form {
-    background: white;
+    background: var(--bg-card);
     border-radius: 16px;
     padding: 2rem;
+    border: 1px solid var(--border-color);
     box-shadow: var(--shadow-md);
 }
 
@@ -1328,14 +1352,15 @@ section {
 
 .modal-content {
     position: relative;
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 24px;
     padding: 3rem;
     max-width: 600px;
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
     z-index: 1;
 }
 
