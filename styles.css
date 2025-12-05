@@ -717,10 +717,22 @@ section {
 
 .achievements li {
     display: flex;
+    align-items: flex-start;
     gap: 1rem;
     margin-bottom: 1rem;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.8;
+}
+
+.achievements li span {
+    flex: 1;
+    display: inline;
+}
+
+.achievements li strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    white-space: normal;
 }
 
 .achievements i {
