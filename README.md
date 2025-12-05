@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Abhijit Barik - Portfolio Website
 
 A modern, responsive portfolio website showcasing my professional experience, projects, and technical skills.
@@ -105,3 +106,6 @@ This project is open source and available under the MIT License.
 
 Made with ❤️ by Abhijit Barik
 
+=======
+# portfolio
+>>>>>>> 502dfa03ab2aa483b3675d9dcab390adc182c50f
