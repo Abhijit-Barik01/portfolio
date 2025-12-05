@@ -7,8 +7,12 @@
     <title>Abhijit Barik | Software Engineer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
@@ -31,20 +35,35 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <canvas id="particle-canvas"></canvas>
         <div class="hero-particles"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
         <div class="container hero-content">
             <div class="hero-text">
                 <h1 class="hero-title">
-                    <span class="greeting">Hi, I'm</span>
-                    <span class="name">Abhijit Barik</span>
+                    <span class="greeting animate__animated animate__fadeInDown">Hi, I'm</span>
+                    <span class="name animate__animated animate__fadeInUp">Abhijit Barik</span>
                 </h1>
-                <h2 class="hero-subtitle">Software Engineer</h2>
-                <p class="hero-description">
+                <h2 class="hero-subtitle">
+                    <span class="typing-text"></span>
+                    <span class="cursor-blink">|</span>
+                </h2>
+                <p class="hero-description animate__animated animate__fadeIn animate__delay-1s">
                     Specializing in C++, Go, Networking Protocols & Cloud Infrastructure
                 </p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <div class="hero-buttons animate__animated animate__fadeInUp animate__delay-1s">
+                    <a href="#contact" class="btn btn-primary btn-glitch">
+                        <span>Get In Touch</span>
+                    </a>
                     <a href="#projects" class="btn btn-secondary">View Projects</a>
+                    <a href="#" id="download-resume" class="btn btn-download">
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com/Abhijit-Barik01" target="_blank" aria-label="GitHub">
@@ -107,20 +126,29 @@
                         I worked on cutting-edge 5G network infrastructure.
                     </p>
                     <div class="about-stats">
-                        <div class="stat">
+                        <div class="stat" data-aos="fade-up">
                             <i class="fas fa-briefcase"></i>
-                            <h3>2+</h3>
+                            <h3 class="counter" data-target="2">0</h3><span class="plus">+</span>
                             <p>Years Experience</p>
+                            <div class="stat-progress">
+                                <div class="stat-progress-bar" style="width: 0%" data-width="100%"></div>
+                            </div>
                         </div>
-                        <div class="stat">
+                        <div class="stat" data-aos="fade-up" data-aos-delay="100">
                             <i class="fas fa-code"></i>
-                            <h3>400+</h3>
+                            <h3 class="counter" data-target="400">0</h3><span class="plus">+</span>
                             <p>LeetCode Problems</p>
+                            <div class="stat-progress">
+                                <div class="stat-progress-bar" style="width: 0%" data-width="100%"></div>
+                            </div>
                         </div>
-                        <div class="stat">
+                        <div class="stat" data-aos="fade-up" data-aos-delay="200">
                             <i class="fas fa-trophy"></i>
-                            <h3>11th</h3>
+                            <h3><span class="counter" data-target="11">0</span><span class="suffix">th</span></h3>
                             <p>Nokia Code Rally</p>
+                            <div class="stat-progress">
+                                <div class="stat-progress-bar" style="width: 0%" data-width="100%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -400,6 +428,59 @@
     <section class="skills" id="skills">
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
+            
+            <!-- Skill Bars -->
+            <div class="skill-bars-section">
+                <h3 class="subsection-title">Core Competencies</h3>
+                <div class="skill-bars">
+                    <div class="skill-bar-item" data-aos="fade-right">
+                        <div class="skill-bar-info">
+                            <span>C++ / Go</span>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <div class="skill-bar-progress">
+                            <div class="skill-bar-fill" style="width: 0%" data-width="95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="100">
+                        <div class="skill-bar-info">
+                            <span>Networking Protocols</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar-progress">
+                            <div class="skill-bar-fill" style="width: 0%" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="200">
+                        <div class="skill-bar-info">
+                            <span>Cloud & Kubernetes</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar-progress">
+                            <div class="skill-bar-fill" style="width: 0%" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="300">
+                        <div class="skill-bar-info">
+                            <span>System Architecture</span>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <div class="skill-bar-progress">
+                            <div class="skill-bar-fill" style="width: 0%" data-width="88%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="400">
+                        <div class="skill-bar-info">
+                            <span>AI/ML & LLM</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar-progress">
+                            <div class="skill-bar-fill" style="width: 0%" data-width="80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="skills-grid">
                 <!-- Languages -->
                 <div class="skill-category">
@@ -597,13 +678,83 @@
         </div>
     </section>
 
+    <!-- Resume Modal -->
+    <div class="modal" id="resume-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <i class="fas fa-file-download"></i>
+                <h2>Download Resume</h2>
+            </div>
+            <div class="modal-body">
+                <p>Choose your preferred format to download my resume:</p>
+                <div class="resume-options">
+                    <button class="resume-btn pdf-btn" onclick="generateResumePDF()">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Download PDF</span>
+                        <small>Recommended</small>
+                    </button>
+                    <button class="resume-btn docx-btn" onclick="viewResumeOnline()">
+                        <i class="fas fa-eye"></i>
+                        <span>View Online</span>
+                        <small>Quick Preview</small>
+                    </button>
+                </div>
+                <div class="resume-preview">
+                    <h3>Resume Highlights:</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 2+ Years of Professional Experience</li>
+                        <li><i class="fas fa-check"></i> IVANTI & NOKIA Background</li>
+                        <li><i class="fas fa-check"></i> C++, Go, Networking Expert</li>
+                        <li><i class="fas fa-check"></i> 400+ LeetCode Problems</li>
+                        <li><i class="fas fa-check"></i> Open Source Contributor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Abhijit Barik. Crafted with <i class="fas fa-heart"></i></p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>AB</h3>
+                    <p>Building the future, one line of code at a time.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#projects">Projects</a>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/Abhijit-Barik01" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/abhijit-barik/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://leetcode.com/u/abro_01/" target="_blank"><i class="fas fa-code"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Abhijit Barik. Crafted with <i class="fas fa-heart pulse"></i> | All Rights Reserved</p>
+            </div>
         </div>
+        <div class="footer-particles"></div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
