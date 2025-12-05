@@ -1,5 +1,5 @@
 // ===== INITIALIZATION =====
-// Initialize AOS (Animate On Scroll)
+// Initialize AOS
 AOS.init({
     duration: 1000,
     once: true,
@@ -10,17 +10,29 @@ AOS.init({
 gsap.registerPlugin(ScrollTrigger);
 
 // ===== CUSTOM CURSOR =====
-const cursor = document.querySelector('.cursor');
-const cursorFollower = document.querySelector('.cursor-follower');
+const cursorDot = document.querySelector('[data-cursor-dot]');
+const cursorOutline = document.querySelector('[data-cursor-outline]');
 
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+window.addEventListener('mousemove', (e) => {
+    cursorDot.style.left = e.clientX + 'px';
+    cursorDot.style.top = e.clientY + 'px';
     
-    setTimeout(() => {
-        cursorFollower.style.left = e.clientX + 'px';
-        cursorFollower.style.top = e.clientY + 'px';
-    }, 100);
+    cursorOutline.animate({
+        left: e.clientX + 'px',
+        top: e.clientY + 'px'
+    }, { duration: 500, fill: 'forwards' });
+});
+
+// Cursor hover effects
+document.querySelectorAll('a, button, .btn').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        cursorDot.style.transform = 'scale(2)';
+        cursorOutline.style.transform = 'scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+        cursorDot.style.transform = 'scale(1)';
+        cursorOutline.style.transform = 'scale(1)';
+    });
 });
 
 // ===== NAVIGATION =====
@@ -133,113 +145,6 @@ if (typingText) {
     setTimeout(typeTitle, 1000);
 }
 
-// ===== MATRIX RAIN EFFECT =====
-const canvas = document.getElementById('particle-canvas');
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    // Matrix rain characters
-    const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?/~`ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    
-    const drops = [];
-    for (let i = 0; i < columns; i++) {
-        drops[i] = Math.random() * canvas.height / fontSize;
-    }
-
-    function drawMatrix() {
-        // Black background with fade effect
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.font = fontSize + 'px monospace';
-        
-        for (let i = 0; i < drops.length; i++) {
-            // Random character
-            const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-            const x = i * fontSize;
-            const y = drops[i] * fontSize;
-            
-            // Gradient effect
-            const gradient = ctx.createLinearGradient(x, y - 20, x, y + 20);
-            gradient.addColorStop(0, 'rgba(0, 255, 65, 0.1)');
-            gradient.addColorStop(0.5, 'rgba(0, 255, 65, 1)');
-            gradient.addColorStop(1, 'rgba(0, 255, 65, 0.1)');
-            ctx.fillStyle = gradient;
-            
-            // Add glow
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#00ff41';
-            
-            ctx.fillText(text, x, y);
-            
-            // Reset position randomly
-            if (y > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-            
-            drops[i]++;
-        }
-    }
-
-    // Animate at 30fps for Matrix effect
-    setInterval(drawMatrix, 50);
-
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-
-    // Add binary rain effect
-    const binaryRain = document.createElement('div');
-    binaryRain.className = 'binary-rain';
-    binaryRain.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
-        overflow: hidden;
-    `;
-    
-    for (let i = 0; i < 20; i++) {
-        const span = document.createElement('span');
-        span.textContent = Math.random() > 0.5 ? '1' : '0';
-        span.style.cssText = `
-            position: absolute;
-            top: -50px;
-            left: ${Math.random() * 100}%;
-            color: rgba(0, 255, 65, 0.3);
-            font-size: ${Math.random() * 20 + 10}px;
-            font-family: monospace;
-            animation: fall ${Math.random() * 3 + 2}s linear infinite;
-            animation-delay: ${Math.random() * 2}s;
-        `;
-        binaryRain.appendChild(span);
-    }
-    
-    if (document.querySelector('.hero')) {
-        document.querySelector('.hero').appendChild(binaryRain);
-    }
-}
-
-// CSS for binary rain
-const binaryStyle = document.createElement('style');
-binaryStyle.textContent = `
-    @keyframes fall {
-        to {
-            transform: translateY(100vh);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(binaryStyle);
-
 // ===== ANIMATED PARTICLES IN HERO =====
 function createParticle() {
     const particle = document.createElement('div');
@@ -256,6 +161,14 @@ function createParticle() {
         animation: float ${Math.random() * 10 + 10}s linear infinite;
     `;
     return particle;
+}
+
+// Add particles to hero section
+const heroParticles = document.querySelector('.hero-particles');
+if (heroParticles) {
+    for (let i = 0; i < 50; i++) {
+        heroParticles.appendChild(createParticle());
+    }
 }
 
 // CSS for particle animation
@@ -340,7 +253,7 @@ const counterObserver = new IntersectionObserver((entries) => {
 counters.forEach(counter => counterObserver.observe(counter));
 
 // ===== PROGRESS BAR ANIMATION =====
-const progressBars = document.querySelectorAll('.stat-progress-bar, .skill-bar-fill');
+const progressBars = document.querySelectorAll('.stat-fill');
 const progressObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -363,7 +276,7 @@ if (codeContent) {
     codeContent.innerHTML = '';
     
     let index = 0;
-    const typingSpeed = 20;
+    const typingSpeed = 15;
     
     function typeCode() {
         if (index < originalContent.length) {
@@ -571,20 +484,37 @@ focusStyle.textContent = `
 `;
 document.head.appendChild(focusStyle);
 
+// ===== THEME TOGGLE =====
+const themeToggle = document.getElementById('theme-toggle');
+let isDark = false;
+
+themeToggle.addEventListener('click', () => {
+    isDark = !isDark;
+    document.body.style.filter = isDark ? 'invert(1) hue-rotate(180deg)' : 'none';
+    const icon = themeToggle.querySelector('i');
+    icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+});
+
 // ===== RESUME MODAL =====
 const downloadResumeBtn = document.getElementById('download-resume');
 const resumeModal = document.getElementById('resume-modal');
 const closeModalBtn = document.getElementById('close-modal');
-const modalOverlay = document.querySelector('.modal-overlay');
+const modalOverlay = document.getElementById('modal-overlay');
 
 function openModal() {
     resumeModal.classList.add('active');
+    resumeModal.querySelector('.modal-content').classList.remove('animate__slideOutDown');
+    resumeModal.querySelector('.modal-content').classList.add('animate__slideInUp');
     document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
-    resumeModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
+    resumeModal.querySelector('.modal-content').classList.remove('animate__slideInUp');
+    resumeModal.querySelector('.modal-content').classList.add('animate__slideOutDown');
+    setTimeout(() => {
+        resumeModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }, 400);
 }
 
 if (downloadResumeBtn) {
@@ -602,7 +532,6 @@ if (modalOverlay) {
     modalOverlay.addEventListener('click', closeModal);
 }
 
-// Close modal with Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
         closeModal();
@@ -622,8 +551,13 @@ function generateResumePDF() {
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
     doc.text('Software Engineer', 105, 28, { align: 'center' });
-    doc.text('Bengaluru, Karnataka', 105, 35, { align: 'center' });
+    doc.text('Bengaluru, Karnataka, India', 105, 35, { align: 'center' });
     doc.text('+91-7908831205 | abhijit45.official@gmail.com', 105, 42, { align: 'center' });
+    
+    // Divider
+    doc.setDrawColor(99, 102, 241);
+    doc.setLineWidth(0.5);
+    doc.line(20, 47, 190, 47);
     
     // Experience
     doc.setFontSize(16);
@@ -637,15 +571,16 @@ function generateResumePDF() {
     doc.setFont(undefined, 'normal');
     doc.setFontSize(10);
     doc.text('July 2024 – Present', 160, 63);
+    doc.text('Tech: C++, Go, WebSocket, Kubernetes, Networking, Load Balancer', 20, 68);
     
     const ivantiBullets = [
-        '• Implemented SAML-based Single Sign-On with assertion ID tracking',
+        '• Integrated SAML-based Single Sign-On with assertion ID tracking',
         '• Designed Multi-Factor Authentication (MFA) using TOTP (RFC 6238)',
         '• Delivered Advanced Feature Packs contributing to $3M Hitachi license',
         '• Automated VTM lifecycle management via Pulse Zero Trust Access'
     ];
     
-    let yPos = 70;
+    let yPos = 74;
     ivantiBullets.forEach(bullet => {
         doc.text(bullet, 25, yPos);
         yPos += 5;
@@ -658,13 +593,15 @@ function generateResumePDF() {
     doc.setFont(undefined, 'normal');
     doc.setFontSize(10);
     doc.text('Aug 2023 – July 2024', 160, yPos);
+    yPos += 5;
+    doc.text('Tech: Linux, C++, 4G/5G, Make', 20, yPos);
     
-    yPos += 7;
+    yPos += 6;
     const nokiaBullets = [
         '• Implemented SZTP option in IPv6 for 5G networks',
-        '• Engineered VSO support in DHCPv6 servers for 5G radios',
-        '• Built network traffic capture reducing debug efforts by 50%',
-        '• Impacted 40% of mobile tower stations with vendor-specific options'
+        '• Engineered VSO support in DHCPv6 servers',
+        '• Reduced debug efforts by 50% with network traffic capture',
+        '• Impacted 40% of mobile tower stations'
     ];
     
     nokiaBullets.forEach(bullet => {
@@ -672,8 +609,22 @@ function generateResumePDF() {
         yPos += 5;
     });
     
-    // Skills
+    yPos += 3;
+    doc.setFont(undefined, 'bold');
+    doc.setFontSize(11);
+    doc.text('NOKIA | Software Engineer Intern', 20, yPos);
+    doc.setFont(undefined, 'normal');
+    doc.setFontSize(10);
+    doc.text('Sept 2022 – July 2023', 160, yPos);
     yPos += 5;
+    doc.text('Tech: Python, Jenkins, Nmap, Security', 20, yPos);
+    yPos += 6;
+    doc.text('• Developed Nmap Jenkins pipeline reducing tracking time from 2 days to 15 minutes', 25, yPos);
+    yPos += 5;
+    doc.text('• Conducted UDP and TCP scans for vulnerability identification', 25, yPos);
+    
+    // Skills
+    yPos += 8;
     doc.setFontSize(16);
     doc.setTextColor(99, 102, 241);
     doc.text('TECHNICAL SKILLS', 20, yPos);
@@ -690,13 +641,31 @@ function generateResumePDF() {
     doc.setFont(undefined, 'bold');
     doc.text('Cloud & Infrastructure:', 20, yPos);
     doc.setFont(undefined, 'normal');
-    doc.text('Kubernetes, Docker, AWS, Kafka, Microservices', 60, yPos);
+    doc.text('Kubernetes, Docker, AWS, Kafka, Microservices, REST API, SOAP', 60, yPos);
     
     yPos += 6;
     doc.setFont(undefined, 'bold');
-    doc.text('Networking:', 20, yPos);
+    doc.text('Networking & Security:', 20, yPos);
     doc.setFont(undefined, 'normal');
-    doc.text('WebSocket, gRPC, BGP, DHCP, TCP/IP, 5G, SAML, OAuth 2.0', 47, yPos);
+    doc.text('WebSocket, gRPC, BGP, DHCP, TCP/IP, 5G, SAML, OAuth 2.0', 62, yPos);
+    
+    yPos += 6;
+    doc.setFont(undefined, 'bold');
+    doc.text('Tools & Systems:', 20, yPos);
+    doc.setFont(undefined, 'normal');
+    doc.text('Git, CMake, Linux, Wireshark, GTest, CI/CD, Boost C++', 52, yPos);
+    
+    yPos += 6;
+    doc.setFont(undefined, 'bold');
+    doc.text('Databases:', 20, yPos);
+    doc.setFont(undefined, 'normal');
+    doc.text('MongoDB, DynamoDB, SQL', 44, yPos);
+    
+    yPos += 6;
+    doc.setFont(undefined, 'bold');
+    doc.text('AI/ML:', 20, yPos);
+    doc.setFont(undefined, 'normal');
+    doc.text('Retrieval-Augmented Generation (RAG), Model Context Protocol (MCP), LLM', 38, yPos);
     
     // Education
     yPos += 10;
@@ -714,7 +683,36 @@ function generateResumePDF() {
     doc.text('July 2021 – July 2023', 160, yPos);
     
     yPos += 6;
-    doc.text('Master of Computer Application | CGPA: 8.64 | VITMEE Rank: 183', 20, yPos);
+    doc.text('Master of Computer Application | CGPA: 8.64/10 | VITMEE All India Rank: 183', 20, yPos);
+    
+    // Projects
+    yPos += 10;
+    doc.setFontSize(16);
+    doc.setTextColor(99, 102, 241);
+    doc.text('PROJECTS', 20, yPos);
+    
+    yPos += 8;
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont(undefined, 'bold');
+    doc.text('AWS ETL Pipeline', 20, yPos);
+    doc.setFont(undefined, 'normal');
+    yPos += 5;
+    doc.text('• Built automated AWS ETL pipeline with PySpark, Lambda, Glue, MongoDB, DynamoDB, S3', 25, yPos);
+    
+    yPos += 6;
+    doc.setFont(undefined, 'bold');
+    doc.text('XDP Firewall (eBPF)', 20, yPos);
+    doc.setFont(undefined, 'normal');
+    yPos += 5;
+    doc.text('• High-performance firewall using XDP and eBPF for kernel-level packet filtering', 25, yPos);
+    
+    yPos += 6;
+    doc.setFont(undefined, 'bold');
+    doc.text('xShellAI', 20, yPos);
+    doc.setFont(undefined, 'normal');
+    yPos += 5;
+    doc.text('• AI-driven, LLM powered Linux shell tool for Ubuntu 24.04', 25, yPos);
     
     // Achievements
     yPos += 10;
@@ -729,7 +727,7 @@ function generateResumePDF() {
     yPos += 5;
     doc.text('• Solved 400+ problems on LeetCode', 20, yPos);
     yPos += 5;
-    doc.text('• Linux Vim Contributor (9.1.1281)', 20, yPos);
+    doc.text('• Contributed open-source fix to Linux Vim (9.1.1281)', 20, yPos);
     
     // Footer
     doc.setFontSize(8);
@@ -741,45 +739,55 @@ function generateResumePDF() {
     closeModal();
     
     // Show success message
-    alert('Resume downloaded successfully! 🎉');
+    setTimeout(() => {
+        alert('✅ Resume downloaded successfully! 🎉');
+    }, 300);
 }
 
 function viewResumeOnline() {
-    // Open LinkedIn profile as online resume
     window.open('https://www.linkedin.com/in/abhijit-barik/', '_blank');
     closeModal();
 }
 
 // ===== GSAP ANIMATIONS =====
-// Parallax effect for sections
+// Parallax effect for hero
+gsap.to('.hero-image', {
+    y: 100,
+    scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1
+    }
+});
+
+// Fade in sections
 gsap.utils.toArray('section').forEach((section, i) => {
     if (i > 0) {
         gsap.from(section, {
             scrollTrigger: {
                 trigger: section,
-                start: 'top bottom',
-                end: 'top center',
+                start: 'top 80%',
+                end: 'top 50%',
                 scrub: 1
             },
-            y: 100,
+            y: 50,
             opacity: 0
         });
     }
 });
 
-// Animate project cards on scroll
-gsap.utils.toArray('.project-card').forEach((card) => {
-    gsap.from(card, {
-        scrollTrigger: {
-            trigger: card,
-            start: 'top bottom-=100',
-            toggleActions: 'play none none reverse'
-        },
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out'
-    });
+// Project cards stagger
+gsap.from('.project-card', {
+    scrollTrigger: {
+        trigger: '.projects-grid',
+        start: 'top 70%'
+    },
+    y: 80,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: 'power2.out'
 });
 
 console.log('🚀 Portfolio loaded with advanced effects! ✨');

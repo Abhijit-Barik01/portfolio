@@ -10,21 +10,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <!-- Cursor Effect -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+    
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-brand">AB</div>
             <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#achievements" class="nav-link">Achievements</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li><a href="#contact" class="nav-cta">Hire Me</a></li>
             </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
@@ -35,34 +39,29 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <canvas id="particle-canvas"></canvas>
         <div class="hero-particles"></div>
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-        </div>
         <div class="container hero-content">
             <div class="hero-text">
                 <h1 class="hero-title">
                     <span class="greeting animate__animated animate__fadeInDown">Hi, I'm</span>
-                    <span class="name animate__animated animate__fadeInUp">Abhijit Barik</span>
+                    <span class="name animate__animated animate__fadeInUp animate__delay-1s">Abhijit Barik</span>
                 </h1>
                 <h2 class="hero-subtitle">
                     <span class="typing-text"></span>
                     <span class="cursor-blink">|</span>
                 </h2>
-                <p class="hero-description animate__animated animate__fadeIn animate__delay-1s">
+                <p class="hero-description animate__animated animate__fadeIn animate__delay-2s">
                     Specializing in C++, Go, Networking Protocols & Cloud Infrastructure
                 </p>
-                <div class="hero-buttons animate__animated animate__fadeInUp animate__delay-1s">
-                    <a href="#contact" class="btn btn-primary btn-glitch">
+                <div class="hero-buttons animate__animated animate__fadeInUp animate__delay-2s">
+                    <a href="#contact" class="btn btn-primary btn-pulse">
                         <span>Get In Touch</span>
+                        <i class="fas fa-paper-plane"></i>
                     </a>
                     <a href="#projects" class="btn btn-secondary">View Projects</a>
                     <a href="#" id="download-resume" class="btn btn-download">
-                        <i class="fas fa-download"></i> Download Resume
+                        <i class="fas fa-download"></i>
+                        <span>Download Resume</span>
                     </a>
                 </div>
                 <div class="social-links">
@@ -128,26 +127,26 @@
                     <div class="about-stats">
                         <div class="stat" data-aos="fade-up">
                             <i class="fas fa-briefcase"></i>
-                            <h3 class="counter" data-target="2">0</h3><span class="plus">+</span>
+                            <h3><span class="counter" data-target="2">0</span>+</h3>
                             <p>Years Experience</p>
-                            <div class="stat-progress">
-                                <div class="stat-progress-bar" style="width: 0%" data-width="100%"></div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 0%" data-width="100%"></div>
                             </div>
                         </div>
                         <div class="stat" data-aos="fade-up" data-aos-delay="100">
                             <i class="fas fa-code"></i>
-                            <h3 class="counter" data-target="400">0</h3><span class="plus">+</span>
+                            <h3><span class="counter" data-target="400">0</span>+</h3>
                             <p>LeetCode Problems</p>
-                            <div class="stat-progress">
-                                <div class="stat-progress-bar" style="width: 0%" data-width="100%"></div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 0%" data-width="100%"></div>
                             </div>
                         </div>
                         <div class="stat" data-aos="fade-up" data-aos-delay="200">
                             <i class="fas fa-trophy"></i>
-                            <h3><span class="counter" data-target="11">0</span><span class="suffix">th</span></h3>
+                            <h3><span class="counter" data-target="11">0</span>th</h3>
                             <p>Nokia Code Rally</p>
-                            <div class="stat-progress">
-                                <div class="stat-progress-bar" style="width: 0%" data-width="100%"></div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 0%" data-width="100%"></div>
                             </div>
                         </div>
                     </div>
@@ -428,59 +427,6 @@
     <section class="skills" id="skills">
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
-            
-            <!-- Skill Bars -->
-            <div class="skill-bars-section">
-                <h3 class="subsection-title">Core Competencies</h3>
-                <div class="skill-bars">
-                    <div class="skill-bar-item" data-aos="fade-right">
-                        <div class="skill-bar-info">
-                            <span>C++ / Go</span>
-                            <span class="skill-percentage">95%</span>
-                        </div>
-                        <div class="skill-bar-progress">
-                            <div class="skill-bar-fill" style="width: 0%" data-width="95%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="100">
-                        <div class="skill-bar-info">
-                            <span>Networking Protocols</span>
-                            <span class="skill-percentage">90%</span>
-                        </div>
-                        <div class="skill-bar-progress">
-                            <div class="skill-bar-fill" style="width: 0%" data-width="90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="200">
-                        <div class="skill-bar-info">
-                            <span>Cloud & Kubernetes</span>
-                            <span class="skill-percentage">85%</span>
-                        </div>
-                        <div class="skill-bar-progress">
-                            <div class="skill-bar-fill" style="width: 0%" data-width="85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="300">
-                        <div class="skill-bar-info">
-                            <span>System Architecture</span>
-                            <span class="skill-percentage">88%</span>
-                        </div>
-                        <div class="skill-bar-progress">
-                            <div class="skill-bar-fill" style="width: 0%" data-width="88%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="400">
-                        <div class="skill-bar-info">
-                            <span>AI/ML & LLM</span>
-                            <span class="skill-percentage">80%</span>
-                        </div>
-                        <div class="skill-bar-progress">
-                            <div class="skill-bar-fill" style="width: 0%" data-width="80%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="skills-grid">
                 <!-- Languages -->
                 <div class="skill-category">
@@ -680,37 +626,42 @@
 
     <!-- Resume Modal -->
     <div class="modal" id="resume-modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <button class="modal-close" id="close-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content animate__animated">
+            <button class="modal-close" id="close-modal" aria-label="Close modal">
                 <i class="fas fa-times"></i>
             </button>
             <div class="modal-header">
                 <i class="fas fa-file-download"></i>
                 <h2>Download Resume</h2>
+                <p>Choose your preferred format</p>
             </div>
             <div class="modal-body">
-                <p>Choose your preferred format to download my resume:</p>
                 <div class="resume-options">
                     <button class="resume-btn pdf-btn" onclick="generateResumePDF()">
-                        <i class="fas fa-file-pdf"></i>
-                        <span>Download PDF</span>
-                        <small>Recommended</small>
+                        <div class="btn-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3>PDF Format</h3>
+                        <p>Recommended for printing</p>
+                        <span class="badge">Popular</span>
                     </button>
                     <button class="resume-btn docx-btn" onclick="viewResumeOnline()">
-                        <i class="fas fa-eye"></i>
-                        <span>View Online</span>
-                        <small>Quick Preview</small>
+                        <div class="btn-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>View Online</h3>
+                        <p>Quick preview on LinkedIn</p>
                     </button>
                 </div>
                 <div class="resume-preview">
                     <h3>Resume Highlights:</h3>
                     <ul>
-                        <li><i class="fas fa-check"></i> 2+ Years of Professional Experience</li>
-                        <li><i class="fas fa-check"></i> IVANTI & NOKIA Background</li>
-                        <li><i class="fas fa-check"></i> C++, Go, Networking Expert</li>
-                        <li><i class="fas fa-check"></i> 400+ LeetCode Problems</li>
-                        <li><i class="fas fa-check"></i> Open Source Contributor</li>
+                        <li><i class="fas fa-check-circle"></i> 2+ Years of Professional Experience</li>
+                        <li><i class="fas fa-check-circle"></i> IVANTI & NOKIA Background</li>
+                        <li><i class="fas fa-check-circle"></i> C++, Go, Networking Expert</li>
+                        <li><i class="fas fa-check-circle"></i> 400+ LeetCode Problems Solved</li>
+                        <li><i class="fas fa-check-circle"></i> Open Source Contributor</li>
                     </ul>
                 </div>
             </div>
@@ -720,6 +671,11 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-wave">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+                </svg>
+            </div>
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>AB</h3>
@@ -745,15 +701,13 @@
                 <p>&copy; 2024 Abhijit Barik. Crafted with <i class="fas fa-heart pulse"></i> | All Rights Reserved</p>
             </div>
         </div>
-        <div class="footer-particles"></div>
     </footer>
 
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
